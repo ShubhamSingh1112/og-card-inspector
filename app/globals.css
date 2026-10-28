@@ -105,7 +105,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 h1, h2, h3, p { margin-top: 0; }
 .hero h1 {
   margin: 27px 0 19px;
-  font: 500 clamp(36px, 8vw, 84px)/.98 var(--serif);
+  font: 500 clamp(52px, 8.5vw, 84px)/.98 var(--serif);
   letter-spacing: -.067em;
 }
 h1 em, h2 em { color: var(--red); font-weight: 400; }
@@ -398,7 +398,7 @@ h1 em, h2 em { color: var(--red); font-weight: 400; }
   .site-header, .site-footer, .hero, .value-section, .checks-section, .faq-section { width: min(100% - 32px, 1120px); }
   .site-header { height: 68px; }
   .hero { padding: 68px 0 70px; }
-  .hero h1 { font-size: clamp(28px, 5vw, 32px); }
+  .hero h1 { font-size: clamp(44px, 13vw, 52px); }
   .section-intro h2, .checks-section h2, .faq-section h2 {
     font-size: clamp(32px, 8.5vw, 40px);
     line-height: 1.08;
