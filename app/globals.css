@@ -105,7 +105,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 h1, h2, h3, p { margin-top: 0; }
 .hero h1 {
   margin: 27px 0 19px;
-  font: 500 clamp(54px, 8.5vw, 104px)/.98 var(--serif);
+  font: 500 clamp(36px, 8vw, 84px)/.98 var(--serif);
   letter-spacing: -.067em;
 }
 h1 em, h2 em { color: var(--red); font-weight: 400; }
@@ -113,7 +113,7 @@ h1 em, h2 em { color: var(--red); font-weight: 400; }
   max-width: 530px;
   margin: 0 auto 37px;
   color: var(--muted);
-  font-size: clamp(15px, 1.6vw, 18px);
+  font-size: clamp(15px, 1.5vw, 18px);
   line-height: 1.65;
 }
 
@@ -398,7 +398,11 @@ h1 em, h2 em { color: var(--red); font-weight: 400; }
   .site-header, .site-footer, .hero, .value-section, .checks-section, .faq-section { width: min(100% - 32px, 1120px); }
   .site-header { height: 68px; }
   .hero { padding: 68px 0 70px; }
-  .hero h1 { font-size: clamp(52px, 16vw, 78px); }
+  .hero h1 { font-size: clamp(28px, 5vw, 32px); }
+  .section-intro h2, .checks-section h2, .faq-section h2 {
+    font-size: clamp(32px, 8.5vw, 40px);
+    line-height: 1.08;
+  }
   .inspector { border-radius: 12px; }
   .inspector-toolbar { min-height: 47px; padding: 8px 12px; }
   .inspector-toolbar > span { font-size: 9px; }
@@ -410,7 +414,8 @@ h1 em, h2 em { color: var(--red); font-weight: 400; }
   .trust-line { flex-wrap: wrap; font-size: 10px; }
   .results { padding: 0 12px 13px; }
   .results-heading { align-items: start; flex-direction: column; gap: 7px; }
-  .results-heading h2 { font-size: 24px; }
+  .results-heading h2 { font-size: 22px; }
+  .cache-card h3, .lead-card h3 { font-size: clamp(20px, 5.5vw, 23px); }
   .score-card, .cache-card, .lead-card { padding: 15px; }
   .score-header { align-items: start; flex-direction: column; }
   .debugger-links { grid-template-columns: 1fr; }
