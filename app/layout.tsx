@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { PwaRegister } from "@/components/PwaRegister";
+import { CookieConsentCard } from "@/components/SitePreferences";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#f6f4ef",
-  colorScheme: "light",
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -53,6 +54,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <PwaRegister />
+        <CookieConsentCard />
         {children}
       </body>
     </html>

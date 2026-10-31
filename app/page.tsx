@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowDown, Check, Image as ImageIcon, Search, Share2, ShieldCheck } from "lucide-react";
+import { ArrowDown, Check, ChevronDown, Image as ImageIcon, Search, Share2, ShieldCheck } from "lucide-react";
 import { InspectorApp } from "@/components/InspectorApp";
+import { CookieSettingsButton, ThemeToggle } from "@/components/SitePreferences";
 
 const checks = [
   "Open Graph and X card tags",
@@ -32,7 +33,10 @@ export default function Home() {
           <span className="brand-mark">O</span>
           <span>OG Inspector<span className="brand-period">.</span></span>
         </Link>
-        <a className="header-link" href="#how-it-works">How it works <ArrowDown size={15} /></a>
+        <div className="header-actions">
+          <a className="header-link" href="#how-it-works">How it works <ArrowDown size={15} /></a>
+          <ThemeToggle />
+        </div>
       </header>
 
       <section className="hero">
@@ -89,17 +93,33 @@ export default function Home() {
       <section className="faq-section">
         <p className="eyebrow">GOOD TO KNOW</p>
         <h2>Frequently asked <em>questions.</em></h2>
-        <div className="faq-grid">
-          <article><h3>What does this tool check?</h3><p>It fetches a public page and reviews its Open Graph, X card, title, description, image, canonical URL, and favicon metadata.</p></article>
-          <article><h3>Does this guarantee a perfect preview?</h3><p>No. Platforms can cache previews, apply their own rules, and render differently. Use the preview as a guide and confirm with each platform’s inspector.</p></article>
-          <article><h3>Is my page stored?</h3><p>Inspection results are held in your browser for the current session. No account is needed to use the checker.</p></article>
-          <article><h3>How do I improve my social cards?</h3><p>Add descriptive Open Graph title, description, and image tags to your page. A 1200 × 630 image is a strong general-purpose starting point.</p></article>
+        <div className="faq-list">
+          <details className="faq-item">
+            <summary><span>What does this tool check?</span><ChevronDown size={19} /></summary>
+            <p>It fetches a public page and reviews its Open Graph, X card, title, description, image, canonical URL, and favicon metadata.</p>
+          </details>
+          <details className="faq-item">
+            <summary><span>Does this guarantee a perfect preview?</span><ChevronDown size={19} /></summary>
+            <p>No. Platforms can cache previews, apply their own rules, and render differently. Use the preview as a guide and confirm with each platform’s inspector.</p>
+          </details>
+          <details className="faq-item">
+            <summary><span>Is my page stored?</span><ChevronDown size={19} /></summary>
+            <p>Inspection results are held in your browser for the current session. No account is needed to use the checker.</p>
+          </details>
+          <details className="faq-item">
+            <summary><span>How do I improve my social cards?</span><ChevronDown size={19} /></summary>
+            <p>Add descriptive Open Graph title, description, and image tags to your page. A 1200 × 630 image is a strong general-purpose starting point.</p>
+          </details>
         </div>
       </section>
 
       <footer className="site-footer">
         <Link className="brand" href="/" aria-label="OG Inspector home"><span className="brand-mark">O</span><span>OG Inspector<span className="brand-period">.</span></span></Link>
-        <span>Clear previews. Better first impressions.</span>
+        <div className="footer-links">
+          <span>Clear previews. Better first impressions.</span>
+          <Link href="/cookies">Cookie policy</Link>
+          <CookieSettingsButton />
+        </div>
       </footer>
     </main>
   );
