@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertCircle, Check, Share2, Sparkles } from "lucide-react";
+import { AlertCircle, Check, LoaderCircle, Share2, Sparkles } from "lucide-react";
 import { CacheTools } from "@/components/CacheTools";
 import { HealthScoreCard } from "@/components/HealthScoreCard";
 import { LeadMagnetBanner } from "@/components/LeadMagnetBanner";
@@ -36,6 +36,26 @@ async function fetchMetadata(targetUrl: string): Promise<OgMetadata> {
   return payload.data;
 }
 
+function ResultsSkeleton() {
+  return (
+    <div className="results-skeleton" aria-hidden="true">
+      <div className="skeleton-card skeleton-audit">
+        <div className="skeleton-score">
+          <span className="skeleton-block skeleton-gauge" />
+          <span className="skeleton-lines"><i /><i /></span>
+        </div>
+        <div className="skeleton-rows">
+          <i /><i /><i />
+        </div>
+      </div>
+      <div className="skeleton-preview-grid">
+        <div className="skeleton-card skeleton-preview"><i /><i /><i /></div>
+        <div className="skeleton-card skeleton-preview"><i /><i /><i /></div>
+      </div>
+    </div>
+  );
+}
+
 export function InspectorApp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,6 +82,10 @@ export function InspectorApp() {
     const sharedUrl = new URLSearchParams(window.location.search).get("url");
     if (!sharedUrl) return;
 
+    let settled = false;
+    const loadingTimer = window.setTimeout(() => {
+      if (active && !settled) setLoading(true);
+    }, 0);
     void fetchMetadata(sharedUrl)
       .then((data) => {
         if (!active) return;
@@ -72,9 +96,17 @@ export function InspectorApp() {
         if (active) {
           setError(caught instanceof Error ? caught.message : "An unexpected error occurred while fetching the URL.");
         }
+      })
+      .finally(() => {
+        settled = true;
+        window.clearTimeout(loadingTimer);
+        if (active) setLoading(false);
       });
 
-    return () => { active = false; };
+    return () => {
+      active = false;
+      window.clearTimeout(loadingTimer);
+    };
   }, []);
 
   const handleShare = async () => {
@@ -108,7 +140,12 @@ export function InspectorApp() {
         </div>
       )}
 
-      {loading && <p className="loading-message" role="status">Reading page metadata…</p>}
+      {loading && (
+        <div className="loading-state" role="status" aria-label="Reading page metadata">
+          <p className="loading-message"><LoaderCircle size={15} /> Reading page metadata…</p>
+          <ResultsSkeleton />
+        </div>
+      )}
 
       {metadata && report && !loading && (
         <div className="results">

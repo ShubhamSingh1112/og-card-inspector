@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { OgMetadata } from '@/types';
+import { PreviewImage } from '@/components/PreviewImage';
 
 interface Props {
   metadata: OgMetadata;
@@ -31,14 +32,13 @@ export function SlackCard({ metadata }: Props) {
         {/* Favicon & Site Name */}
         <div className="flex items-center gap-1.5 text-xs text-[#d1d2d3]">
           {metadata.favicon ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
+            <PreviewImage
+              key={metadata.favicon}
               src={metadata.favicon}
               alt=""
-              className="w-4 h-4 rounded-sm object-contain"
-              onError={(e) => {
-                (e.currentTarget as HTMLElement).style.display = 'none';
-              }}
+              className="h-4 w-4 shrink-0 overflow-hidden rounded-sm"
+              imageClassName="h-full w-full object-contain"
+              unavailableClassName="hidden"
             />
           ) : (
             <div className="w-3.5 h-3.5 rounded bg-neutral-600" />
@@ -65,18 +65,14 @@ export function SlackCard({ metadata }: Props) {
 
         {/* Image Attachment */}
         {metadata.image && (
-          <div className="mt-2 overflow-hidden rounded-lg max-w-sm border border-[#2d3136]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={metadata.image}
-              alt={metadata.title}
-              className="w-full max-h-56 object-cover"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src =
-                  'https://placehold.co/1200x630/222529/737373?text=Image+Failed+To+Load';
-              }}
-            />
-          </div>
+          <PreviewImage
+            key={metadata.image}
+            src={metadata.image}
+            alt={metadata.title}
+            className="mt-2 aspect-[1.91/1] max-w-sm overflow-hidden rounded-lg border border-[#2d3136]"
+            imageClassName="max-h-56 w-full object-cover"
+            unavailableClassName="preview-image-unavailable min-h-24"
+          />
         )}
       </div>
     </div>

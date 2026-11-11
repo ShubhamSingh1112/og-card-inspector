@@ -3,6 +3,7 @@
 import React from 'react';
 import { OgMetadata } from '@/types';
 import { ExternalLink } from 'lucide-react';
+import { PreviewImage } from '@/components/PreviewImage';
 
 interface Props {
   metadata: OgMetadata;
@@ -56,15 +57,12 @@ export function TwitterCard({ metadata }: Props) {
             {/* Large Image Aspect Ratio */}
             <div className="relative aspect-[1.91/1] w-full bg-neutral-900 overflow-hidden flex items-center justify-center">
               {metadata.image ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
+                <PreviewImage
+                  key={metadata.image}
                   src={metadata.image}
                   alt={metadata.title}
-                  className="w-full h-full object-cover transition duration-300 group-hover:scale-[1.01]"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src =
-                      'https://placehold.co/1200x630/171717/737373?text=Image+Failed+To+Load';
-                  }}
+                  className="absolute inset-0"
+                  imageClassName="w-full h-full object-cover transition duration-300 group-hover:scale-[1.01]"
                 />
               ) : (
                 <div className="text-neutral-500 text-sm flex flex-col items-center gap-1 p-6 text-center">
@@ -97,11 +95,12 @@ export function TwitterCard({ metadata }: Props) {
           <div className="flex items-center">
             <div className="w-32 h-32 shrink-0 bg-neutral-900 relative overflow-hidden flex items-center justify-center border-r border-neutral-800">
               {metadata.image ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
+                <PreviewImage
+                  key={metadata.image}
                   src={metadata.image}
                   alt={metadata.title}
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0"
+                  imageClassName="w-full h-full object-cover"
                 />
               ) : (
                 <span className="text-xs text-neutral-500">No Image</span>

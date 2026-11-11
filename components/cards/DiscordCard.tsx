@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { OgMetadata } from '@/types';
+import { PreviewImage } from '@/components/PreviewImage';
 
 interface Props {
   metadata: OgMetadata;
@@ -61,18 +62,15 @@ export function DiscordCard({ metadata }: Props) {
 
         {/* Embedded Image */}
         {metadata.image && (
-          <div className="mt-3 overflow-hidden rounded-md max-w-md bg-[#1e1f22]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={metadata.image}
-              alt={metadata.title}
-              className="max-h-72 w-full object-cover"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src =
-                  'https://placehold.co/1200x630/1e1f22/737373?text=Image+Failed+To+Load';
-              }}
+          <PreviewImage
+            key={metadata.image}
+            src={metadata.image}
+            alt={metadata.title}
+            className="mt-3 aspect-[1.91/1] max-w-md overflow-hidden rounded-md bg-[#1e1f22]"
+            imageClassName="max-h-72 w-full object-cover"
+            unavailableClassName="preview-image-unavailable min-h-24"
+            unavailableText="Image unavailable"
             />
-          </div>
         )}
       </div>
     </div>

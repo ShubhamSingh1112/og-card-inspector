@@ -3,6 +3,7 @@
 import React from 'react';
 import { OgMetadata } from '@/types';
 import { ThumbsUp, MessageSquare, Repeat2, Send } from 'lucide-react';
+import { PreviewImage } from '@/components/PreviewImage';
 
 interface Props {
   metadata: OgMetadata;
@@ -56,15 +57,12 @@ export function LinkedInCard({ metadata }: Props) {
       >
         <div className="relative aspect-[1.91/1] w-full bg-neutral-900 overflow-hidden flex items-center justify-center">
           {metadata.image ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
+            <PreviewImage
+              key={metadata.image}
               src={metadata.image}
               alt={metadata.title}
-              className="w-full h-full object-cover transition duration-300 group-hover:scale-[1.01]"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src =
-                  'https://placehold.co/1200x630/171717/737373?text=Image+Failed+To+Load';
-              }}
+              className="absolute inset-0"
+              imageClassName="w-full h-full object-cover transition duration-300 group-hover:scale-[1.01]"
             />
           ) : (
             <div className="text-neutral-500 text-xs">No Preview Image</div>

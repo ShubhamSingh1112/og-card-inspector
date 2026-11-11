@@ -7,7 +7,7 @@ import "./globals.css";
 const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  ...(siteUrl ? { metadataBase: siteUrl } : {}),
+  metadataBase: siteUrl ?? new URL("http://localhost:3000"),
   title: {
     default: "OG Card Inspector — Free Social Preview & Meta Tag Checker",
     template: "%s | OG Card Inspector",
